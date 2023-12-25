@@ -1,6 +1,6 @@
 # KMACXOF256 with AWS Lambda
 
-This project combines core materials from my 2 classes: TCSS 462 Cloud Computing and TCSS 487 Cryptography. The goal is to have the encryption function of KMACXOF256 in a AWS Lambda function. The output will be the encryption of the data sent to the Lambda function.
+This project combines core materials from my 2 classes: TCSS 462 Cloud Computing and TCSS 487 Cryptography. The goal is to have the encryption/decryption function of KMACXOF256 in 2 AWS Lambda functions. The output will be the cryptogram for the encryption and plaintext for the decryption of the data sent to the corresponding Lambda function.
 
 KMACXOF256 stands for "Keccak Message Authentication Code eXtensible-Output Function 256." It is a specific instance of the KMAC construction, designed to produce an extendable-output function (XOF) with a fixed output length of 256 bits security.
 

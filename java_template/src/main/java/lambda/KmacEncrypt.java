@@ -1,14 +1,6 @@
 package lambda;
 
-import java.awt.Graphics;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.HashMap;
-
-import javax.imageio.ImageIO;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
@@ -16,7 +8,7 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 import saaf.Inspector;
 import saaf.Response;
 
-public class GrayScale implements RequestHandler<Request, HashMap<String, Object>> {
+public class KmacEncrypt implements RequestHandler<Request, HashMap<String, Object>> {
     /**
      * Lambda Function Handler
      * 
@@ -24,18 +16,21 @@ public class GrayScale implements RequestHandler<Request, HashMap<String, Object
      * @param context 
      * @return HashMap that Lambda will automatically convert into JSON.
      */
-    public HashMap<String, Object> handleRequest(Request request, Context context) {
+    public HashMap<String, Object> handleRequest(final Request request, final Context context) {
         
         //Collect inital data.
-        Inspector inspector = new Inspector();
+        final Inspector inspector = new Inspector();
         inspector.inspectAll();
         
         //****************START FUNCTION IMPLEMENTATION*************************
-        
+        final byte[] data = request.getRecords().getBytes();
+        final String passphrase = request.getName();
+        String cyptogram = ByteStringUtil.bytesToHex(KMAC.encrypt(data, passphrase));
+        inspector.addAttribute("cryptogram", cyptogram);
+
         //Create and populate a separate response object for function output. (OPTIONAL)
-        Response response = new Response();
-        
-        inspector.consumeResponse(response);
+        // final Response response = new Response();
+        // response.setValue("Hello! This is from a response object!");
         
         //****************END FUNCTION IMPLEMENTATION***************************
         
