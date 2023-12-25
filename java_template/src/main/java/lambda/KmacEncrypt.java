@@ -20,12 +20,12 @@ public class KmacEncrypt implements RequestHandler<Request, HashMap<String, Obje
         
         //Collect inital data.
         final Inspector inspector = new Inspector();
-        inspector.inspectAll();
+        // inspector.inspectAll();
         
         //****************START FUNCTION IMPLEMENTATION*************************
-        final byte[] data = request.getRecords().getBytes();
+        final byte[] plaintext = request.getData().getBytes();
         final String passphrase = request.getName();
-        String cyptogram = ByteStringUtil.bytesToHex(KMAC.encrypt(data, passphrase));
+        String cyptogram = ByteStringUtil.bytesToHex(KMAC.encrypt(plaintext, passphrase));
         inspector.addAttribute("cryptogram", cyptogram);
 
         //Create and populate a separate response object for function output. (OPTIONAL)

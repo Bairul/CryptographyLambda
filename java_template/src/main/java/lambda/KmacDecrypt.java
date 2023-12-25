@@ -21,10 +21,10 @@ public class KmacDecrypt implements RequestHandler<Request, HashMap<String, Obje
         
         //Collect inital data.
         final Inspector inspector = new Inspector();
-        inspector.inspectAll();
+        // inspector.inspectAll();
         
         //****************START FUNCTION IMPLEMENTATION*************************
-        final String cryptogram = request.getCryptogram();
+        final String cryptogram = request.getData();
         final String passphrase = request.getName();
         byte[] decryption = KMAC.decrypt(ByteStringUtil.hexToBytes(cryptogram), passphrase);
         // removes the last bit because it just encodes whether t = t'
@@ -38,7 +38,7 @@ public class KmacDecrypt implements RequestHandler<Request, HashMap<String, Obje
             inspector.addAttribute("accept", 0);
         }
 
-        inspector.addAttribute("deciphered text", cryptogram);
+        inspector.addAttribute("decipheredText", new String(decryption));
 
         //Create and populate a separate response object for function output. (OPTIONAL)
         // final Response response = new Response();
