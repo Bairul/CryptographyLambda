@@ -4,6 +4,8 @@ This project combines core materials from my 2 classes: TCSS 462 Cloud Computing
 
 KMACXOF256 stands for "Keccak Message Authentication Code eXtensible-Output Function 256." It is a specific instance of the KMAC construction, designed to produce an extendable-output function (XOF) with a fixed output length of 256 bits security.
 
+Two REST API Gateway urls is created for the 2 Lambda functions.
+
 **ACKNOWLEDGEMENT**
 
 This project is made using a template from my Cloud Computing professor, Wes Lloyd. His [Github Repo](https://github.com/wlloyduw/SAAF). 
